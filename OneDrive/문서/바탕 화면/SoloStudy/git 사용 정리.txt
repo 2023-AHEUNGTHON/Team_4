@@ -1,0 +1,28 @@
+git push 씹혔을때 사이트
+https://github.com/sku-likelion11th/HackerThon_team3/compare/main...ckdwns1221:HackerThon_team3:front2?expand=1
+
+원격주소
+https://github.com/sku-likelion11th/New_team3.git
+
+로컬 주소
+https://github.com/ckdwns1221/New_team3.git
+
+git config --global core.autocrlf true
+
+git add .
+git commit -m "적을 내용"
+git push origin [branch명]
+
+깃허브 원격 페이지가서 풀 리퀘스트
+merge 하고
+터미널로 돌아와서
+
+git pull upstream main
+ - 새로운 버전 내 로컬에 받기
+git checkout main
+ - 브랜치에서 메인으로 이동
+git checkout -b [branch명]
+ - 새로운 브랜치만들고 만든 브랜치로 이동
+git branch -d [branch명]
+ - 기존에 썻던 브랜치 삭제
+
