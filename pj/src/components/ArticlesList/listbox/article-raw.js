@@ -22,7 +22,6 @@ function ArticleRaw ({data, onCancle}) {
     };
 
     const { title, text } = state;
-    console.log(data);
     //수정할 때, 이전 내용 기억하는 거 구현 (바뀐 내용은 onChange에서 구현함)
     useEffect(() => { // useEffect 적용!
         setState({
@@ -30,7 +29,6 @@ function ArticleRaw ({data, onCancle}) {
             title: data.title,
             text: data.content
         })
-        console.log('렌더링이 완료되었습니다!');
       }, []);
 
     const onChange = e =>{

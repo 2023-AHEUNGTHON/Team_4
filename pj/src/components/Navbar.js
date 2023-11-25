@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import '../css/Navbar.css'
-import { getCookie,deleteCookie } from 'cookies-next';
+import { getCookie} from 'cookies-next';
 
 const Navbar = () => {
     const isLogin = getCookie('token')
-    console.log(isLogin)
 
     return (
         <div className="Nav-container">
