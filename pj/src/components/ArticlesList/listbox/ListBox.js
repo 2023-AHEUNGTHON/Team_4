@@ -20,14 +20,14 @@ const ListBox = ({category}) => {
 
     useEffect(()=>{
         const getScraps = async()=>{
-            await myScrapApi.getMyScrap(category,0,"memo").then(data=>{
-                console.log(data)
-                setPosts(data.data.content)
+            await myScrapApi.getMyScrap(category,'',"memo").then(res=>{
+                console.log("scraps",res.data.data.content)
+                setPosts(res.data.data.content)
             })
         }
         getScraps()        
     },[category])
-    console.log(posts); 
+    console.log("posts",posts); 
 
     const offset = (page - 1) * limit;
 
@@ -37,7 +37,7 @@ const ListBox = ({category}) => {
                 {posts && posts.slice(offset, offset + limit).map((it,index) =>(
                     <div className="list" key={index} onClick={()=>{modalOpen(); cilckIndex(index);}}>
                         <button className="list-btn">
-                            <p>사진</p>
+                            <p> <img src={it.thumbnail} alt={it.title}></img> </p>
                         </button>
                         <span id="list-box-title">{it.title}</span>
                         <span id="list-box-date">{it.date}</span>
