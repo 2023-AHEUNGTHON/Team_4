@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { validateUserName, validatePassword } from '../utils/validateInput';
 import userApi from '../apis/users';
+import { setCookie } from 'cookies-next';
 
 export default function Login() {
   const [loginForm, loginFormHandler, areValid] = useAuthForm(
@@ -22,7 +23,10 @@ export default function Login() {
     console.log(loginForm);
     await userApi
       .login(loginForm)
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res.data)
+        setCookie(res.data.data.token)
+    })
       .catch((err) => console.log(err));
   };
 
