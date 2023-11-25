@@ -64,30 +64,36 @@ function SharedRaw ({data, onCancle}) {
                     />
                     <img id="heart" src={data.like?heart:heart_filled} alt="찜"/>
                 </div>
-                <div id="file-select">
-                   <input
-                    id="note-file"
-                    name="file"
-                    type="file"
-                    placeholder="파일을 등록하세요."
-                    // value={text}
-                    onChange={onChange}
-                    /> 
-                </div>
-                <textarea
-                    id="note-link"
-                    name="text"
-                    placeholder="텍스트 입력하세요."
-                    value={text}
-                    onChange={onChange}
-                />
-                <textarea
-                    id="note-text"
-                    name="text"
-                    placeholder="텍스트 입력하세요."
-                    value={text}
-                    onChange={onChange}
-                />
+                {data.type==="file" && (
+                    <div id="file-select">
+                        <input
+                        id="note-file"
+                        name="file"
+                        type="file"
+                        placeholder="파일을 등록하세요."
+                        // value={text}
+                        onChange={onChange}
+                        /> 
+                    </div>
+                )}
+                {data.type==="link"&&(
+                    <textarea
+                        id="note-link"
+                        name="text"
+                        placeholder="텍스트 입력하세요."
+                        value={text}
+                        onChange={onChange}
+                    />
+                )}
+                {data.type==="memo"&&(
+                    <textarea
+                        id="note-text"
+                        name="text"
+                        placeholder="텍스트 입력하세요."
+                        value={text}
+                        onChange={onChange}
+                    />
+                )}
             </div>
             <div className="foot-btn">
                 <p id="date-modal">{date}</p>
