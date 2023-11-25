@@ -18,6 +18,14 @@ export default function WriteScrap() {
   const colors = ['#ffd392', '#ffac92', '#ffcfe8', '#92caff', '#ff929f', '#a192ff', '#dc92ff', '#e1e2e3']; // 각 버튼별 색상
   const [activeButton, setActiveButton] = useState(null);
   const [activeRButton, setActiveRButton] = useState(null);
+  const [postDto, setPostDto]  = useState({
+    "category" : "",
+    "title" : "",
+    "memo" : "",
+    "link": "",
+    "share" : true
+})
+ const [file, setFile] = useState()
   const rBtns = [{ name: '공개' }, { name: '나만 보기' }];
 
   const [isOpen, setIsOpen] = useState(false);
@@ -35,6 +43,7 @@ export default function WriteScrap() {
     setIsOpen(false);
     navigate('/scrap');
   };
+
 
   return (
     <div className="display-container">
