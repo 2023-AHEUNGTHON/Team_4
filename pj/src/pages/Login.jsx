@@ -20,11 +20,9 @@ export default function Login() {
   );
   const movePage = useNavigate();
   const submitLogin = async () => {
-    console.log(loginForm);
     await userApi
       .login(loginForm)
       .then((res) => {
-        console.log(res.data)
         deleteCookie('token')
         setCookie('token',res.data.data.token)
         movePage('/')

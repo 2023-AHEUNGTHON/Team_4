@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import React, { useEffect, useState } from "react";
+import React  from "react";
 import './typebox.css';
 import { Link } from 'react-router-dom';
-import myScrapApi from '../../../apis/myScrap'
 
 const ButtonStyle = styled.button`
     height: 130px;
@@ -16,17 +15,6 @@ const ButtonStyle = styled.button`
 `;
 const TypeBox = ({category,color}) => {
     const category_ = category ;
-    const [scraps, setScraps] = useState([])
-    useEffect(()=>{
-        const getScraps = async()=>{
-            await myScrapApi.getMyScrap(category,0,"memo").then(data=>{
-                console.log(data)
-                setScraps(data.data.content)
-            })
-        }
-        getScraps()        
-
-    },[category])
     const color_ = color ;
     console.log(category_);
 

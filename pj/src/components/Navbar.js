@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import '../css/Navbar.css'
+import { getCookie,deleteCookie } from 'cookies-next';
 
 const Navbar = () => {
+    const isLogin = getCookie('token')
+    console.log(isLogin)
+
     return (
         <div className="Nav-container">
             <div className='bg-Ring'>
@@ -13,20 +17,8 @@ const Navbar = () => {
                     </div>
                 </Link>
             </div>
-            {/* <div className='bg-Light'>
-                <Link to='/login' className='Link-login'>
-                    <div className="Nav-loginBtn">
-                        로그인
-                    </div>
-                    <img className='Nav-Light' alt='Nav-Light' src='img/img_Light.png' />
-                </Link>
-                <Link to='/signup' className='Link-login'>
-                    <div className="Nav-signupBtn">
-                        회원가입
-                    </div>
-                </Link>
-            </div> */}
-            <div className='logoutWrap'>
+
+            {isLogin?(<div className='logoutWrap'>
                 <div className="NMpAndLogout">
                     <Link to='/mypage'>
                         <div className="navimgProfile">
@@ -40,7 +32,20 @@ const Navbar = () => {
                     </Link>
                 </div>
                 <img className='Nav-Light' alt='Nav-Light' src='img/img_Light.png' />   
-            </div>
+            </div>):(
+            <div className='bg-Light'>
+                <Link to='/login' className='Link-login'>
+                    <div className="Nav-loginBtn">
+                        로그인
+                    </div>
+                    <img className='Nav-Light' alt='Nav-Light' src='img/img_Light.png' />
+                </Link>
+                <Link to='/signup' className='Link-login'>
+                    <div className="Nav-signupBtn">
+                        회원가입
+                    </div>
+                </Link>
+            </div>)}     
       </div>
     );
 };
