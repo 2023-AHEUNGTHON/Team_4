@@ -29,7 +29,7 @@ const Navbar = () => {
             <div className='logoutWrap'>
                 <div className="NMpAndLogout">
                     <Link to='/mypage'>
-                        <div className="navimgProfile">
+                        <div className="navImgProfile">
                             <img src="/img/Img_Profile.png" alt="" />
                         </div>
                     </Link>
