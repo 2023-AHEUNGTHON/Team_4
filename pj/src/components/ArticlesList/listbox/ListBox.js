@@ -4,6 +4,7 @@ import data from '../../../db.json';
 import ArticleRaw from "./article-raw";
 import ModalPage from "./modal";
 import Pagination from "../../pagination";
+import myScrapApi from '../../../apis/myScrap'
 
 const ListBox = ({category}) => {
     // 모달
@@ -17,10 +18,15 @@ const ListBox = ({category}) => {
     const [limit, setLimit] = useState(12);
     const [page, setPage] = useState(1);
 
-    useEffect(() => {
-        // 비동기 작업 (예: API 호출) 후 posts 설정
-        setPosts(dataList);
-    }, []); 
+    useEffect(()=>{
+        const getScraps = async()=>{
+            await myScrapApi.getMyScrap(category,0,"memo").then(data=>{
+                console.log(data)
+                setPosts(data.data.content)
+            })
+        }
+        getScraps()        
+    },[category])
     console.log(posts); 
 
     const offset = (page - 1) * limit;
@@ -28,7 +34,7 @@ const ListBox = ({category}) => {
     return(
         <div className="list-container">
             <div className="posts-list">
-                {posts.slice(offset, offset + limit).map((it,index) =>(
+                {posts && posts.slice(offset, offset + limit).map((it,index) =>(
                     <div className="list" key={index} onClick={()=>{modalOpen(); cilckIndex(index);}}>
                         <button className="list-btn">
                             <p>사진</p>
@@ -48,12 +54,12 @@ const ListBox = ({category}) => {
 
             </div>
 
-            <Pagination
+            {posts && <Pagination
                     total={posts.length}
                     limit={limit}
                     page={page}
                     setPage={setPage}
-            />
+            />}
         </div>
         
     )

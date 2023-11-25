@@ -3,7 +3,6 @@ import './TypeSelect.css';
 import Footer from '../../components/Footer';
 import TypeBox from '../../components/TypeSelect/typebox/typebox';
 import TBar from '../../components/TypeSelect/TypeSelectBar';
-
 function TypeSelect() {
     let { category } = useParams();
     let color;
@@ -23,6 +22,8 @@ function TypeSelect() {
         color = '#DC92FF';
     else if(category==='etc')
         color = '#E1E3E3';
+
+    
     return (
         <>
             <div className='display-container'>
