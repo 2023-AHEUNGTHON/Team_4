@@ -9,9 +9,21 @@ import ListHeartBox from '../components/ArticlesList/listbox/ListHeartBox';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faHeart} from "@fortawesome/free-solid-svg-icons";
+import userApi from "../apis/users"
+
 function Mypage() {
 
     const [activeTab, setActiveTab] = useState("userInfo");
+    const [img, setImg] = useState();
+
+    const updateProfileImage = async()=>{
+        const form = new FormData()
+        form.append('file',img)
+        await userApi.updateProfileImg(form).then(res=>console.log(res))
+    }
+    const onChageImage = (e)=>{
+        setImg(e.target.files[0])
+    }
 
     const UserInfo = () => (
         <div className="mArticleInfo">
@@ -19,7 +31,9 @@ function Mypage() {
             <div className="mFileBox">
                 <input 
                     type="file"
+                    style={{width:'100%',height:'100%'}}
                     accept=".jpg, .jpeg, .png, .gif"
+                    onChange={onChageImage}
                     multiple />
             </div>
             <div className="mInputTitle">닉네임</div>
@@ -30,9 +44,7 @@ function Mypage() {
                     /* value={id} */
                     placeholder='닉네임을 입력해주세요.'/>
             </div>
-            <Link to='/'>
-                <button className="mSaveBtn">저장하기</button>
-            </Link>
+                <button className="mSaveBtn" onClick={updateProfileImage}>저장하기</button>
         </div>
     );
 

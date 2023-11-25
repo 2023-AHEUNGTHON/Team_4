@@ -16,7 +16,7 @@ export default {
     return axios.put('users/updateNickName', data, tokenConfig());
   },
   updateProfileImg(data) {
-    return axios.post('users/updateProfileImg', data, tokenConfig());
+    return axios.put('users/updateProfileImg', data, tokenConfig('form'));
   },
   getUserInfo(data) {
     return axios.get('users/info', data, tokenConfig());

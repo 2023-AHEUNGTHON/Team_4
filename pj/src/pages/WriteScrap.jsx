@@ -47,19 +47,17 @@ export default function WriteScrap() {
   };
   const submitPost = async() =>{
     const form = new FormData()
-    Object.keys(postDto).forEach(key=>{
-        if(key === 'share'){
-            form.append('dto.share',postDto[key]==='공개'?true:false)
-            return
-        }
-        if(key==='category'){
-            const cate = buttons.find(item=>item.name === postDto[key]).value
-            form.append('dto.category',cate)
-            return
-        }
-        form.append(`dto.${key}`,postDto[key])
-    })
-    files.forEach(file=>( form.append('files',file) )) 
+    const cate = buttons.find(item=>item.name === postDto.category).value
+    const data = {...postDto,share: postDto.share === '공개',category:cate}
+    console.log("data",data)
+   form.append(
+      'dto',
+      new Blob([JSON.stringify(data)], {
+        type: 'application/json',
+      })
+    );
+
+    if(files && files.length > 0) files.forEach(file=>( form.append('files',file) )) 
     await postApi.postScrap(form).then(res=>{
         console.log("ok",res.data)
     }).catch(err=>console.log(err))
