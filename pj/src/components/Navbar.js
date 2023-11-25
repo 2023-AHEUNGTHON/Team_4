@@ -4,8 +4,13 @@ import '../css/Navbar.css'
 import { getCookie,deleteCookie } from 'cookies-next';
 
 const Navbar = () => {
-    const isLogin = getCookie('token')
+    const isLogin = getCookie('token');
     console.log(isLogin)
+
+    const handleLogout = () => {
+        // 로그아웃 시 토큰 삭제
+        deleteCookie('token');
+    };
 
     return (
         <div className="Nav-container">
@@ -18,7 +23,8 @@ const Navbar = () => {
                 </Link>
             </div>
 
-            {isLogin?(<div className='logoutWrap'>
+            {isLogin?(
+            <div className='logoutWrap'>
                 <div className="NMpAndLogout">
                     <Link to='/mypage'>
                         <div className="navimgProfile">
@@ -26,13 +32,14 @@ const Navbar = () => {
                         </div>
                     </Link>
                     <Link to='/' style={{textDecoration: "none"}}>
-                        <div className="navLogoutBtn">
+                        <div className="navLogoutBtn" style={{width:"100px", height:"50px"}} onClick={() => handleLogout()}>
                             로그아웃
                         </div>
                     </Link>
                 </div>
                 <img className='Nav-Light' alt='Nav-Light' src='img/img_Light.png' />   
-            </div>):(
+            </div>
+            ):(
             <div className='bg-Light'>
                 <Link to='/login' className='Link-login'>
                     <div className="Nav-loginBtn">
@@ -45,7 +52,8 @@ const Navbar = () => {
                         회원가입
                     </div>
                 </Link>
-            </div>)}     
+            </div>
+            )}     
       </div>
     );
 };

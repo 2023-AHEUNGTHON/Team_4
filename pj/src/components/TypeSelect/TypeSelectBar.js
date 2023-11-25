@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import './TypeSelectBar.css';
 import { Link } from 'react-router-dom';
 import Search from '../Search';
+import { getCookie,deleteCookie } from 'cookies-next';
 
 const HeaderStyle = styled.header`
     width: 100%;
@@ -11,6 +12,14 @@ const HeaderStyle = styled.header`
 `;
 
 function TBar({color,category}) {  
+    const isLogin = getCookie('token');
+    console.log(isLogin)
+
+    const handleLogout = () => {
+        // 로그아웃 시 토큰 삭제
+        deleteCookie('token');
+    };    
+
     let category_1 ;
     if (category == 'news')
         category_1 = '시사/뉴스';
@@ -41,19 +50,6 @@ function TBar({color,category}) {
                             </div>
                         </Link>
                     </div>
-                    {/* <div className='TSBg-Light'>
-                        <Link to='/login' className='RSLink-login'>
-                            <div className="TSNav-loginBtn">
-                                로그인
-                            </div>
-                            <img className='TSNav-Light' alt='Nav-Light' src='img/img_Light.png' />
-                        </Link>
-                        <Link to='/signup' className='TSLink-login'>
-                            <div className="TSNav-signupBtn">
-                                회원가입
-                            </div>
-                        </Link>
-                    </div> */}
                     <div className='TSLogoutWrap'>
                         <div className="TSMpAndLogout">
                             <Link to='/mypage'>
@@ -61,11 +57,28 @@ function TBar({color,category}) {
                                     <img src="/img/Img_Profile.png" alt="" />
                                 </div>
                             </Link>
-                            <Link to='/' style={{textDecoration: "none"}}>
-                                <div className="TSNavLogout">
-                                    로그아웃
+                            {isLogin?(
+                                <Link to='/' style={{textDecoration: "none"}}>
+                                    <div className="TSNavLogout" onClick={handleLogout}>
+                                        로그아웃
+                                    </div>
+                                </Link>
+                            ):(
+                                <div className='bg-Light'>
+                                    <Link to='/login' className='Link-login'>
+                                        <div className="Nav-loginBtn">
+                                            로그인
+                                        </div>
+                                        <img className='Nav-Light' alt='Nav-Light' src='img/img_Light.png' />
+                                    </Link>
+                                    <Link to='/signup' className='Link-login'>
+                                        <div className="Nav-signupBtn">
+                                            회원가입
+                                        </div>
+                                    </Link>
                                 </div>
-                            </Link>
+                            )}
+                            
                         </div>
                         <img className='TSNav-Light' alt='Nav-Light' src='img/img_Light.png' />
                     </div>

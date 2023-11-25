@@ -7,8 +7,19 @@ import './Main.css'
 /* font-awesome */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { getCookie,deleteCookie } from 'cookies-next';
+
 /* import Avatar from "boring-avatars"; */
 function Main() {
+  const isLogin = getCookie('token');
+    console.log(isLogin)
+
+    const handleLogout = () => {
+        // 로그아웃 시 토큰 삭제
+        deleteCookie('token');
+    };
+
+
     const movePage= useNavigate();
 
     function moveWriteScrap() {
@@ -44,6 +55,7 @@ function Main() {
             {/* <div className='Main-navLogin' onClick={ moveLogin }>
               로그인
             </div> */}
+            {isLogin?(
             <div className='mLogoutWrap'>
                 <Link to='/mypage'>
                     <div className="mImgProfile">
@@ -51,13 +63,27 @@ function Main() {
                     </div>
                 </Link>
                 <Link to='/' style={{textDecoration: "none"}}>
-                    <div className="mNavLogout">
-                        로그아웃
-                    </div>
+                        <div className="navLogoutBtn" onClick={() => handleLogout()}>
+                            로그아웃
+                        </div>
                 </Link>
             </div>
+            ):(
+            <div className='bg-Light'>
+              <Link to='/login' className='Link-login'>
+                  <div className="Nav-loginBtn">
+                      로그인
+                  </div>
+                  <img className='Nav-Light' alt='Nav-Light' src='img/img_Light.png' />
+              </Link>
+              <Link to='/signup' className='Link-login'>
+                  <div className="Nav-signupBtn">
+                      회원가입
+                  </div>
+              </Link>
           </div>
-
+            )}  
+         </div>
           {/* Main section */}
           <div className='Main-container'>
             <div className='mainBgImg'>

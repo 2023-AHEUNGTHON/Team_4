@@ -11,13 +11,13 @@ function ArticlesList() {
     const location = useLocation()
     const category = location.state?.category;
     const color = location.state?.color;
-    console.log(category);
+    console.log("in article list"+category);
     return (
         <div className="display-container">
             <div className='aMainWrap'>
                 <LBar type={type} category={category} color={color}/>
                     <main>
-                        <ListBox/>
+                        <ListBox category={category}/>
                     </main>
             </div>
             <Footer/>

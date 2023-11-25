@@ -1,7 +1,8 @@
-import './ArticleListBar.css';
+import '../TypeSelect/TypeSelectBar.css';
 import { Link,useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Search from '../Search';
+import { getCookie,deleteCookie } from 'cookies-next';
 
 const HeaderStyle = styled.header`
     width: 100%;
@@ -11,6 +12,15 @@ const HeaderStyle = styled.header`
 `;
 
 function LBar({type,category,color}) {
+    const isLogin = getCookie('token');
+    console.log(isLogin)
+
+    const handleLogout = () => {
+        // 로그아웃 시 토큰 삭제
+        deleteCookie('token');
+    };
+
+
     let category_1 ;
     if (category == 'news')
         category_1 = '시사/뉴스';
@@ -38,28 +48,61 @@ function LBar({type,category,color}) {
         typed = '메모';
 
     return (
-      <HeaderStyle color={color}>
-        <div className='hl-set2'>
-            <Search/>
-            <img src='/images/Img_Ring.png' alt='이미지1' id='ring' />
-            <img src='/images/Img_Light.png' alt='이미지2' id='light' />
-        </div>
-        <div className='hl-set1'>
-            <Link to='/'>
-                <img id='tllogo' src='/img/Logo.png' alt='로고'/>
-            </Link>
-            <div id='tltext'>
-                <p id='tltitle'>{category_1}</p>
-                <p id='tlinfo'>&gt; {typed}</p>
+        <div className="display-container">
+            <HeaderStyle color={color}>
+                <div className="TSNav-container">
+                    <div className='TSBg-Ring'>
+                        <img className='TSNav-Ring' alt='Nav-Ring' src='/img/Img_Ring.png' />
+                        <Link to='/'>
+                            <div className="TSNav-logo">
+                                <img className='TSlogo-img' src="/img/Logo.png" alt="Logo.png" />
+                            </div>
+                        </Link>
+                    </div>
+                    <div className='TSLogoutWrap'>
+                        <div className="TSMpAndLogout">
+                            <Link to='/mypage'>
+                                <div className="TSNavImgProfile">
+                                    <img src="/img/Img_Profile.png" alt="" />
+                                </div>
+                            </Link>
+                            {isLogin?(
+                                <Link to='/' style={{textDecoration: "none"}}>
+                                    <div className="TSNavLogout" onClick={handleLogout}>
+                                        로그아웃
+                                    </div>
+                                </Link>
+                            ):(
+                                <div className='bg-Light'>
+                                    <Link to='/login' className='Link-login'>
+                                        <div className="Nav-loginBtn">
+                                            로그인
+                                        </div>
+                                        <img className='Nav-Light' alt='Nav-Light' src='/img/Img_Light.png'/>
+                                    </Link>
+                                    <Link to='/signup' className='Link-login'>
+                                        <div className="Nav-signupBtn">
+                                            회원가입
+                                        </div>
+                                    </Link>
+                                </div>
+                            )}
+                            
+                        </div>
+                        <img className='TSNav-Light' alt='Nav-Light' src='/img/Img_Light.png' />
+                    </div>
+                </div>
+            </HeaderStyle>
+            <div className="typeAndSearch">
+                <div id='tText'>
+                        <p id='tTitle'>{category_1}</p>
+                        <p id='tInfo'>&gt; {typed}</p>
+                    </div>
+                <div className="TSBSearch">
+                    <Search/>
+                </div>
             </div>
         </div>
-        <div className='hl-set3'>
-            <p>로그아웃</p>
-            <div id='tl_user_radius'>
-                <img src='img/profile.png' alt='프로필' id='tl_user_image'/>
-            </div>
-        </div>
-      </HeaderStyle>
     );
 }
     

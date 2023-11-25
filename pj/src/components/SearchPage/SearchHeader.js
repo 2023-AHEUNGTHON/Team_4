@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import './SearchHeader.css';
 import { Link,useNavigate } from 'react-router-dom';
 import Search from '../Search';
+import { getCookie,deleteCookie } from 'cookies-next';
 
 const HeaderStyle = styled.header`
     width: 100%;
@@ -10,7 +11,14 @@ const HeaderStyle = styled.header`
     background-color: #BEDCF3 ;
 `;
 
-function SHeader({searchkey}) {     
+function SHeader({searchkey}) { 
+    const isLogin = getCookie('token');
+    console.log(isLogin)
+
+    const handleLogout = () => {
+        // 로그아웃 시 토큰 삭제
+        deleteCookie('token');
+    };    
     return (
         <HeaderStyle >
             <div className='hs-set2'>
@@ -27,12 +35,28 @@ function SHeader({searchkey}) {
                     <p id='stitle'>에 대한 검색 결과</p>
                 </div>
             </div>
-            <div className='hs-set3'>
-                <p>로그아웃</p>
-                <div id='s_user_radius'>
-                    <img src='img/profile.png' alt='프로필' id='s_user_image'/>
+            {isLogin?(
+                <Link to='/' style={{textDecoration: "none"}}>
+                    <div className="TSNavLogout" onClick={handleLogout}>
+                        로그아웃
+                    </div>
+                </Link>
+            ):(
+                <div className='bg-Light'>
+                    <Link to='/login' className='Link-login'>
+                        <div className="Nav-loginBtn">
+                            로그인
+                        </div>
+                        <img className='Nav-Light' alt='Nav-Light' src='img/img_Light.png' />
+                    </Link>
+                    <Link to='/signup' className='Link-login'>
+                        <div className="Nav-signupBtn">
+                            회원가입
+                        </div>
+                    </Link>
                 </div>
-            </div>
+            )}
+            
         </HeaderStyle>
     );
 }
