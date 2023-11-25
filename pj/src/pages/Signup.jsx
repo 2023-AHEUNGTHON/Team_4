@@ -33,7 +33,8 @@ export default function Signup() {
         password: signupForm.password,
       })
       .then((response) => {
-        console.log(response);
+        alert(response.data.message)
+        movePage('/login')
       })
       .catch((e) => console.log(e));
   };

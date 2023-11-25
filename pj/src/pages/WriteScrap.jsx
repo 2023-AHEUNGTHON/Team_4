@@ -4,11 +4,23 @@ import '../css/WriteScrap.css';
 import Navbar from '../components/Navbar';
 
 export default function WriteScrap() {
+  const navigate = useNavigate();
+  const buttons = [
+    { name: '시사/뉴스' },
+    { name: '푸드' },
+    { name: '문화/예술' },
+    { name: '경제/금융' },
+    { name: 'IT/기술' },
+    { name: '건강/의학' },
+    { name: '비즈니스' },
+    { name: '기타' },
+  ];
+  const colors = ['#ffd392', '#ffac92', '#ffcfe8', '#92caff', '#ff929f', '#a192ff', '#dc92ff', '#e1e2e3']; // 각 버튼별 색상
+  const [activeButton, setActiveButton] = useState(null);
   const [activeRButton, setActiveRButton] = useState(null);
   const rBtns = [{ name: '공개' }, { name: '나만 보기' }];
 
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
 
   const openModal = () => {
     setIsOpen(true);

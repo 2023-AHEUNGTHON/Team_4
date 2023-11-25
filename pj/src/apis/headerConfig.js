@@ -14,9 +14,9 @@ const tokenConfig = (type = 'json') => {
     };
   }
 
-  const token = getCookie('access_token');
+  const token = getCookie('token');
   // Headers
-
+  console.log("token",token)
   if (token) {
     config.headers['Authorization'] = `Bearer ${token}`;
   }
