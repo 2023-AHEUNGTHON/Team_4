@@ -58,3 +58,86 @@
     margin-right: 20px;
     font-size: 24px;
 }
+
+.TSNav-container {
+    display: flex;
+    justify-content: space-between;
+}
+.TSBg-Ring {
+    position: relative;
+    z-index: 0;
+}
+.TSNav-logo {
+    position: absolute;
+    top: 25px;
+    left: 65%;
+    z-index: 0;
+}
+.TSBg-Light {
+    position: relative;
+    margin: 15px 30px 0 0;
+}
+.TSLink-login {
+    color: black;
+    text-decoration: none;
+}
+.TSNav-loginBtn {
+    position: absolute;
+    color: #000000;
+    font-size: 14px;
+    font-weight: 600;
+    top: 15px;
+    right: 65%;
+}
+.TSNav-signupBtn {
+    position: absolute;
+    font-size: 14px;
+    font-weight: 600;
+    top: 15px;
+    right: 15%;
+}
+.TSLogoutWrap {
+    position: relative;
+    margin: 15px 30px 0 0;
+}
+.TSNavImgProfile {
+    position: absolute;
+    font-size: 14px;
+    font-weight: 600;
+    top: 8px;
+    right: 65%;
+}
+.TSNavLogout {
+    position: absolute;
+    top: 15px;
+    right: 20%;
+    font-size: 14px;
+    font-weight: 600;
+    color: #000000;
+}
+.typeAndSearch {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: -70px;
+    position: relative;
+    z-index: 10;
+    height: 45px;
+}
+#tText {
+    display: flex;
+    flex-direction: row;
+    margin-left: 138px;
+}
+#tTitle {
+    font-size: 24px;
+    font-weight: 700;
+    margin-right: 15px;
+}
+#tInfo{
+    color: #5d5e5f;
+    margin-top: 35px;
+}
+.TSBSearch {
+    margin: 10px 120px 0 0;
+}

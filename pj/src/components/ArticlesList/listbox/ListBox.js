@@ -14,20 +14,27 @@ const ListBox = ({category}) => {
     const [index, setIndex] = useState();
     const cilckIndex = (c) => {setIndex(c);};
     //페이징
-    const [posts, setPosts] = useState([]);
+    const [posts, setPosts] = useState();
     const [limit, setLimit] = useState(12);
     const [page, setPage] = useState(1);
 
-    useEffect(()=>{
-        const getScraps = async()=>{
-            await myScrapApi.getMyScrap(category,'',"memo").then(res=>{
-                console.log("scraps",res.data.data.content)
-                setPosts(res.data.data.content)
-            })
+    useEffect(() => {
+        const getScraps = async () => {
+            try {
+                const response = await myScrapApi.getMyScrap(category, 0, "memo");
+                console.log(response.data.content);
+                setPosts(response.data.content);
+            } catch (error) {
+                console.error("Error fetching scraps:", error);
+            }
         }
-        getScraps()        
-    },[category])
-    console.log("posts",posts); 
+    
+        getScraps();
+    }, [category]);
+    useEffect(() => {
+        console.log("posts:", posts);
+    }, [posts]);
+
 
     const offset = (page - 1) * limit;
 
@@ -54,12 +61,12 @@ const ListBox = ({category}) => {
 
             </div>
 
-            {posts && <Pagination
+            {/* {posts && <Pagination
                     total={posts.length}
                     limit={limit}
                     page={page}
                     setPage={setPage}
-            />}
+            />} */}
         </div>
         
     )
