@@ -49,9 +49,9 @@ function ArticleRaw ({data, onCancle}) {
             </div>
             <div id="note-from">
                 <div id="cat_type">
-                    <div id="cat_modal"><p>{data.category}</p></div>
-                    <div id="type_modal"><p>{data.type}</p></div>
-                    <div id="pub_modal"><p>{data.public?'public':'Private'}</p></div>
+                        <div id="cat_modal">{data.category}</div>
+                        <div id="type_modal">{data.type}</div>
+                        <div id="pub_modal">{data.public?'public':'Private'}</div>
                 </div>
                 <input
                     id="note-title"
@@ -61,31 +61,36 @@ function ArticleRaw ({data, onCancle}) {
                     value={title}
                     onChange={onChange}
                 />
-
-                <div id="file-select">
-                   <input
-                    id="note-file"
-                    name="file"
-                    type="file"
-                    placeholder="파일을 등록하세요."
-                    // value={text}
-                    onChange={onChange}
-                    /> 
-                </div>
-                <textarea
-                    id="note-link"
-                    name="text"
-                    placeholder="텍스트 입력하세요."
-                    value={text}
-                    onChange={onChange}
-                />
-                <textarea
-                    id="note-text"
-                    name="text"
-                    placeholder="텍스트 입력하세요."
-                    value={text}
-                    onChange={onChange}
-                />
+                {data.type==="file" && (
+                    <div id="file-select">
+                        <input
+                        id="note-file"
+                        name="file"
+                        type="file"
+                        placeholder="파일을 등록하세요."
+                        // value={text}
+                        onChange={onChange}
+                        /> 
+                    </div>
+                )}
+                {data.type==="link"&&(
+                    <textarea
+                        id="note-link"
+                        name="text"
+                        placeholder="텍스트 입력하세요."
+                        value={text}
+                        onChange={onChange}
+                    />
+                )}
+                {data.type==="memo"&&(
+                    <textarea
+                        id="note-text"
+                        name="text"
+                        placeholder="텍스트 입력하세요."
+                        value={text}
+                        onChange={onChange}
+                    />
+                )}
             </div>
             <div className="foot-btn">
                 <p id="date-modal">{date}</p>
